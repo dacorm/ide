@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Editor</title>
+  <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="./fonts/fonts.css" />
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header__title">Онлайн редактор кода</h1>
+    <p class="header__subtitle">Компиляция HTML, CSS, JavaScript в режиме реального времени</p>
+  </header>
+  <div id="ide-parent">
+    <div id="button-wrapper">
+      <button onclick="switchPanel(0)">HTML</button>
+      <button onclick="switchPanel(1)">CSS</button>
+      <button onclick="switchPanel(2)">js</button>
+      <button onclick="runEdit(3)">Result</button>
+    </div>
+    <div id="ide-container">
+      <div class="panel-wrapper">
+        <div id="html">
+&lt;!--Стандартный HTML--&gt;
+
+&lt;div class="container" id="app"&gt;
+&lt;/div&gt;
+
+        </div>
+      </div>
+      <div class="panel-wrapper">
+        <div id="css">
+/*Стандартный CSS*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+}
+
+.square {
+    width: 16px;
+    height: 16px;
+    background-color: #1d1d1d;
+    margin: 2px;
+    box-shadow: 0 0 2px #000;
+    transition: 2s ease;
+}
+
+.square:hover {
+    transition-duration: 0s;
+}
+
+
+        </div>
+      </div>
+      <div class="panel-wrapper">
+        <div id="js">
+// Стандартный JavaScript
+
+const board = document.querySelector('#board');
+const SQUARES_NUMBER = 500;
+const colors = [
+    'green',
+    'gray',
+    'white',
+    'blue',
+]
+
+for (let i = 0; i < SQUARES_NUMBER; i++) {
+    const square = document.createElement('div');
+    square.classList.add('square');
+    square.addEventListener('mouseover', () => {
+    setColor(square)
+})
+    square.addEventListener('mouseleave', () => {
+    removeColor(square)
+})
+    board.append(square)
+}
+
+function setColor(element) {
+    const color = getRandomColor()
+    element.style.backgroundColor = color;
+    element.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+}
+
+function removeColor(element) {
+    element.style.backgroundColor = `#1d1d1d`
+    element.style.boxShadow = `0 0 2px #1d1d1d`;
+}
+
+function getRandomColor() {
+    const index = Math.floor(Math.random() * colors.length);
+    return colors[index];
+}
+        </div>
+      </div>
+      <div class="panel-wrapper">
+        <iframe id="result"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+  </div>
+  <div class="footer">
+    <div class="inner-wrap">
+      <p>&#169; <span></span> abc</p>
+      <div class="icons-wrap">
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
